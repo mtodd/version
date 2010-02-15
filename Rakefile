@@ -15,10 +15,13 @@ spec = Gem::Specification.new do |s|
   s.author  = 'Stephen Touset'
   s.email   = 'stephen@touset.org'
   
-  s.files   = Dir['[A-Z]*', 'lib/**/*.rb', 'spec/**/*']
+  s.files   = Dir['[A-Z]*', 'bin/*', 'lib/**/*.rb', 'spec/**/*']
   
   s.extra_rdoc_files = Dir['*.rdoc']
   s.rdoc_options = %w{ --main README.rdoc }
+  
+  s.bindir      = 'bin'
+  s.executables = ['version']
   
   s.add_development_dependency 'rspec'
 end
