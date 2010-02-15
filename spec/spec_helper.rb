@@ -7,3 +7,5 @@ require 'spec/autorun'
 
 Spec::Runner.configure do |config|
 end
+
+V = lambda{ |*a| v = *a; (v || '0.0.0').to_version }

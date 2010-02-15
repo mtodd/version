@@ -2,35 +2,27 @@ require 'spec_helper'
 
 describe Version do
   it 'should preserve equality' do
-    v0_0.should       == v0_0
-    v0_1_1.should     == v0_1_1
-    v0_4_alpha.should == v0_4_alpha
-    v1_0_2.should     == v1_0_2
-    v1_0_2b.should    == v1_0_2b
-    v1_01.should      == v1_01
-    v1_10.should      == v1_10
-    v2_0.should       == v2_0
-    va.should         == vb
+    V["0.0"]      .should == V["0.0"]
+    V["0.1.1"]    .should == V["0.1.1"]
+    V["0.4.alpha"].should == V["0.4.alpha"]
+    V["1.0.2"]    .should == V["1.0.2"]
+    V["1.0.2b"]   .should == V["1.0.2b"]
+    V["1.01"]     .should == V["1.01"]
+    V["1.10"]     .should == V["1.10"]
+    V["2.0"]      .should == V["2.0"]
+    V["a"]        .should == V["b"]
   end
   
   it 'should order correctly' do
-    v0_0.should     < v0_0_0_0_0_1
-    v0_0_0_1.should < v1
-    v0_1a.should    < v0_1
-    v0_01.should    < v0_10
-    v0_9.should     < v0_10
+    V["0.0"]    .should < V["0.0.0.0.0.1"]
+    V["0.0.0.1"].should < V["1"]
+    V["0.1a"]   .should < V["0.1"]
+    V["0.01"]   .should < V["0.10"]
+    V["0.9"]    .should < V["0.10"]
   end
   
   it 'should reassign the major version and zero out the minor and revisions' do
-    (v = v0_0_0).major = 1
-    v.should == v1_0_0
-  end
-  
-  def method_missing(name, *args, &block)
-    super unless args.empty?
-    super unless block.nil?
-    super unless name.to_s =~ /^v[\d\w_]+$/
-    
-    name.to_s.gsub(/^v/, '').gsub(/_/, '.').to_version
+    (v = V[]).major = 1
+    v.should == V['1.0.0']
   end
 end
