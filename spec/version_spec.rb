@@ -21,6 +21,11 @@ describe Version do
     v0_9.should     < v0_10
   end
   
+  it 'should reassign the major version and zero out the minor and revisions' do
+    (v = v0_0_0).major = 1
+    v.should == v1_0_0
+  end
+  
   def method_missing(name, *args, &block)
     super unless args.empty?
     super unless block.nil?
